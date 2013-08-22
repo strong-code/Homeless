@@ -6,13 +6,24 @@
 	</head>
 
 	<body>
-		<h1>Homeless v1</h1>
+		<h1>Homeless v1.0</h1>
 		<form id="main" method="POST" action="/">
 			Area name: <input type="text" tabindex=1 name="area" placeholder="sfbay" /><br>
-			City Name: <input type="text" tabindex=2 name="city" placeholder="sfc" /><br>
-			<input type="submit" tabindex=3 value="Home, Sweet Home">
+			City name: <input type="text" tabindex=2 name="city" placeholder="sfc" /><br>
+			Keywords: <input type="text" tabindex=3 name="keywords" placeholder="sunny loft" /><br>
+			Price minimum: $<input type="number" tabindex=4 name="pricemin" placeholder="0" /><br>
+			Price maximum: $<input type="number" tabindex=5 name="pricemax" placeholder="0" /><br>
+			Bedrooms: <select name="rooms">
+						<option value="0">Any</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+					</select><br>
+			Dog friendly: <input type="checkbox" tabindex=6 name="dog" /><br>
+			Cat friendly: <input type="checkbox" tabindex=7 name="car" /><br>
+			<input type="submit" value="Home, Sweet Home">
 		</form>
 	</body>
-
 
 </html>

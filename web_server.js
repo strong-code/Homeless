@@ -1,3 +1,4 @@
+var parser = require('parse-rss');
 var server = require('express');
 	app = server();
 
@@ -7,13 +8,35 @@ app.use(server.bodyParser());
 app.listen(8080);
 
 app.post('/', function(req, res) {
-	console.log(req.body.area);
-	console.log(req.body.city)
-	res.redirect('/homeless.html');
+	doSearch(req.body.area, req.body.city)
+	res.redirect('/results.html');
 });
 
 console.log('Server listening on port 8080.');
 
 function doSearch(area, city) {
-	//zzzz fill this in after you get some sleep
+	var url = 'http://sfbay.craigslist.org/sfc/apa/index.rss';
+	var xmlString = '';
+	parser(url, function(err, rss) {
+		if (err) {
+			console.error(err);
+		}
+		return parseXML(rss);
+	});
+}
+
+function parseXML(rss) {
+	var listings = [];
+	for (i in rss) {
+		listings.push(new Listing(rss[i].title, rss[i].pubdate, 
+			rss[i].link, rss[i].description));
+	}
+	//console.log(listings);
+}
+
+function Listing(title, pubdate, link, description) {
+	this.title = title;
+	this.pubdate = pubdate;
+	this.link = link;
+	this.description = description;
 }

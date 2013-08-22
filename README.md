@@ -10,6 +10,6 @@ Because I wanted to learn node, and the original version is a piece of shit that
 
 ##Requirements
 
-Node.js and Express via npm
+Node.js and Express as well as parse-rss via npm (I need to make a package.json file at some point if the requires ever grow bigger, for now just deal with it you nerds)
 
 Hopefully I will have a demo up and running on Heroku once the backend is finished.
