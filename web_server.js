@@ -8,9 +8,15 @@ app.use(server.bodyParser());
 app.listen(8080);
 
 app.post('/', function(req, res) {
-	doSearch(buildURL(req.body.area, req.body.city, req.body.query, req.body.pricemin, 
-		req.body.pricemax, req.body.rooms, req.body.cat, req.body.dog));
-	res.redirect('/homeless.html');
+	try {
+		doSearch(buildURL(req.body.area, req.body.city, req.body.query, req.body.pricemin, 
+			req.body.pricemax, req.body.rooms, req.body.cat, req.body.dog));
+		res.redirect('/results.html');
+	} catch (e) {
+		console.error(e);
+		//should have a dedicated error page or message to user
+		res.redirect('/homeless.html');
+	}
 });
 
 console.log('Server listening on port 8080.');
