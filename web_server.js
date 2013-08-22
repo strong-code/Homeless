@@ -8,15 +8,14 @@ app.use(server.bodyParser());
 app.listen(8080);
 
 app.post('/', function(req, res) {
-	doSearch(req.body.area, req.body.city)
-	res.redirect('/results.html');
+	doSearch(buildURL(req.body.area, req.body.city, req.body.query, req.body.pricemin, 
+		req.body.pricemax, req.body.rooms, req.body.cat, req.body.dog));
+	res.redirect('/homeless.html');
 });
 
 console.log('Server listening on port 8080.');
 
-function doSearch(area, city) {
-	var url = 'http://sfbay.craigslist.org/sfc/apa/index.rss';
-	var xmlString = '';
+function doSearch(url) {
 	parser(url, function(err, rss) {
 		if (err) {
 			console.error(err);
@@ -25,13 +24,23 @@ function doSearch(area, city) {
 	});
 }
 
+function buildURL(area, city, query, pricemin, pricemax, rooms, cat, dog) {
+	var cat = ((cat == undefined) ? '' : '&addTwo=purrr');
+	var dog = ((dog == undefined) ? '' : '&addThree=wooof');
+
+	var url = 'http://'+area+'.craigslist.org/search/apa/'+city+'?query='+encodeURIComponent(query)+
+	'&zoomToPosting=&srchType=A&minAsk='+pricemin+'&maxAsk='+pricemax+'&bedrooms='+rooms+cat+dog+'&format=rss';
+
+	return url;
+}
+
 function parseXML(rss) {
 	var listings = [];
 	for (i in rss) {
 		listings.push(new Listing(rss[i].title, rss[i].pubdate, 
 			rss[i].link, rss[i].description));
 	}
-	//console.log(listings);
+	console.log(listings);
 }
 
 function Listing(title, pubdate, link, description) {
