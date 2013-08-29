@@ -6,7 +6,7 @@ A re-write of [CLPadFinder](https://github.com/clindsay107/CLPadFinder) but usin
 
 ##Why?
 
-Because I wanted to learn node, and the original version is a piece of shit that hadly works. Plus I want to give this a nice web interface and practice my design skills.
+Because I wanted to learn node, and the original version is a piece of shit that hardly works. Plus I want to give this a nice web interface and practice my design skills.
 
 ##Requirements
 
